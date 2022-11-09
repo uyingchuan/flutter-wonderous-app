@@ -9,6 +9,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  go_router: ^5.1.1
+  intl: ^0.17.0
+  flutter_native_splash: ^2.2.14
 
 dev_dependencies:
   flutter_test:
@@ -23,6 +28,10 @@ flutter_icons:
 
 flutter:
   uses-material-design: true
+
+  # 国际化
+  # https://docs.flutter.dev/development/accessibility-and-localization/internationalization
+  generate: true
 
   assets:
     - assets/images/_common/
