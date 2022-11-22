@@ -14,6 +14,12 @@ class AppStyle {
 
   /// 文字样式
   late final _Text text = _Text();
+
+  /// 内外边距
+  late final _Insets insets = _Insets();
+
+  /// 圆角半径
+  late final _Corners corners = _Corners();
 }
 
 @immutable
@@ -50,4 +56,23 @@ class _Text {
       fontWeight: weight,
     );
   }
+}
+
+@immutable
+class _Insets {
+  late final double xxs = 4;
+  late final double xs = 8;
+  late final double sm = 16;
+  late final double md = 24;
+  late final double lg = 32;
+  late final double xl = 48;
+  late final double xxl = 56;
+  late final double offset = 80;
+}
+
+@immutable
+class _Corners {
+  late final double sm = 4;
+  late final double md = 8;
+  late final double lg = 32;
 }
