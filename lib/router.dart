@@ -2,10 +2,12 @@ import 'package:wonders/common_libs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:wonders/ui/app_scaffold.dart';
 import 'package:wonders/ui/screens/intro/intro.dart';
+import 'package:wonders/ui/screens/wonder_details/wonder_details_screen.dart';
 
 class ScreenPaths {
   static String splash = '/';
   static String intro = '/welcome';
+  static String wonderDetails(WonderType type, {int tabIndex = 0}) => '/wonder/${type.name}?t=$tabIndex';
 }
 
 final appRouter = GoRouter(
@@ -18,6 +20,13 @@ final appRouter = GoRouter(
       routes: [
         AppRoute(ScreenPaths.splash, (_) => Container(color: $styles.colors.greyStrong)),
         AppRoute(ScreenPaths.intro, (_) => const IntroScreen()),
+        AppRoute('/wonder/:type', (s) {
+          int tab = int.tryParse(s.queryParams['t'] ?? '') ?? 0;
+          return WonderDetailsScreen(
+            type: _parseWonderType(s.params['type']!),
+            initialTabIndex: tab,
+          );
+        }),
       ],
     )
   ],
@@ -57,3 +66,7 @@ class AppRoute extends GoRoute {
   );
   final bool useFade;
 }
+
+WonderType _parseWonderType(String value) => _tryParseWonderType(value) ?? WonderType.chichenItza;
+
+WonderType? _tryParseWonderType(String value) => WonderType.values.asNameMap()[value];
