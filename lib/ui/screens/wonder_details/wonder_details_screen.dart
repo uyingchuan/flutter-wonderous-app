@@ -1,5 +1,6 @@
 import 'package:wonders/common_libs.dart';
 import 'package:wonders/ui/common/lazy_indexed_stack.dart';
+import 'package:wonders/ui/common/measurable_widget.dart';
 import 'package:wonders/ui/screens/wonder_details/wonder_details_tab_menu.dart';
 
 class WonderDetailsScreen extends StatefulWidget {
@@ -14,7 +15,7 @@ class WonderDetailsScreen extends StatefulWidget {
 class WonderDetailsScreenState extends State<WonderDetailsScreen> with SingleTickerProviderStateMixin {
   // 监听并刷新页面
   late final _tabController = TabController(
-    length: 2,
+    length: 4,
     vsync: this,
     initialIndex: widget.initialTabIndex,
   )..addListener(_handleTabChanged);
@@ -47,6 +48,8 @@ class WonderDetailsScreenState extends State<WonderDetailsScreen> with SingleTic
           LazyIndexedStack(
             index: _tabController.index,
             children: [
+              Padding(padding: EdgeInsets.only(bottom: tabBarHeight), child: Container(color: $styles.colors.white,)),
+              Padding(padding: EdgeInsets.only(bottom: tabBarHeight), child: Container(color: $styles.colors.white,)),
               Padding(padding: EdgeInsets.only(bottom: tabBarHeight), child: Container(color: $styles.colors.white,)),
               Padding(padding: EdgeInsets.only(bottom: tabBarHeight), child: Container(color: $styles.colors.white,)),
             ],

@@ -1,12 +1,14 @@
 import 'package:wonders/common_libs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:wonders/ui/app_scaffold.dart';
+import 'package:wonders/ui/screens/home/wonders_home_screen.dart';
 import 'package:wonders/ui/screens/intro/intro.dart';
 import 'package:wonders/ui/screens/wonder_details/wonder_details_screen.dart';
 
 class ScreenPaths {
   static String splash = '/';
   static String intro = '/welcome';
+  static String home = '/home';
   static String wonderDetails(WonderType type, {int tabIndex = 0}) => '/wonder/${type.name}?t=$tabIndex';
 }
 
@@ -20,6 +22,7 @@ final appRouter = GoRouter(
       routes: [
         AppRoute(ScreenPaths.splash, (_) => Container(color: $styles.colors.greyStrong)),
         AppRoute(ScreenPaths.intro, (_) => const IntroScreen()),
+        AppRoute(ScreenPaths.home, (_) => const HomeScreen()),
         AppRoute('/wonder/:type', (s) {
           int tab = int.tryParse(s.queryParams['t'] ?? '') ?? 0;
           return WonderDetailsScreen(

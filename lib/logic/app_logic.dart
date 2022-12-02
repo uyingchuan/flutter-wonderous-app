@@ -22,6 +22,6 @@ class AppLogic {
     isBootstrapComplete = true;
 
     // 初始化操作结束后跳转相应页面
-    appRouter.go(ScreenPaths.wonderDetails(wondersLogic.all[0].type));
+    appRouter.go(ScreenPaths.intro);
   }
 }
