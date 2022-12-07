@@ -111,6 +111,13 @@ class _IntroScreenState extends State<IntroScreen> {
         right: $styles.insets.lg,
         bottom: $styles.insets.lg,
         child: _buildFinishBtn(context),
+      ),
+
+      BottomCenter(
+        child: Padding(
+          padding: EdgeInsets.only(bottom: $styles.insets.lg),
+          child: _buildNavText(context),
+        ),
       )
     ]);
 
@@ -118,7 +125,7 @@ class _IntroScreenState extends State<IntroScreen> {
       color: $styles.colors.offWhite,
       child: Container(
         color: $styles.colors.black,
-        child: SafeArea(child: content.animate().fadeIn(delay: 1500.ms)),
+        child: SafeArea(child: content.animate().fadeIn(delay: 500.ms)),
       ),
     );
   }
@@ -135,6 +142,26 @@ class _IntroScreenState extends State<IntroScreen> {
             bgColor: $styles.colors.accent1,
             semanticLabel: $strings.introSemanticEnterApp,
             onPressed: _handleIntroCompletePressed,
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildNavText(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: _currentPage,
+      builder: (_, pageIndex, __) {
+        return AnimatedOpacity(
+          opacity: pageIndex == pageData.length - 1 ? 0 : 1,
+          duration: $styles.times.fast,
+          child: Semantics(
+            onTapHint: $strings.introSemanticNavigate,
+            onTap: () {
+              final int current = _pageController.page!.round();
+              _pageController.animateToPage(current + 1, duration: 250.ms, curve: Curves.easeIn);
+            },
+            child: Text($strings.introSemanticSwipeLeft, style: $styles.text.bodySmall,),
           ),
         );
       },
