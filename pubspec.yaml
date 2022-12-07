@@ -21,6 +21,9 @@ dependencies:
   get_it_mixin: ^3.1.4
   shared_preferences: ^2.0.15
   sized_context: ^1.0.0+1
+  gap: ^2.0.1
+  flutter_svg: ^1.1.6
+  smooth_page_indicator: ^1.0.0+2
 
 dev_dependencies:
   flutter_test:

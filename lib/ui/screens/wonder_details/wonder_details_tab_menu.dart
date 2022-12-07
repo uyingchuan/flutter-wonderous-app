@@ -37,9 +37,13 @@ class WonderDetailsTabMenu extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   _TabBtn(0, tabController,
-                      iconImg: 'editorial', color: iconColor, label: 'label'),
+                      iconImg: 'editorial', color: iconColor, label: $strings.wonderDetailsTabLabelInformation),
                   _TabBtn(1, tabController,
-                      iconImg: 'photos', color: iconColor, label: 'label'),
+                      iconImg: 'photos', color: iconColor, label: $strings.wonderDetailsTabLabelImages),
+                  _TabBtn(2, tabController,
+                      iconImg: 'artifacts', color: iconColor, label: $strings.wonderDetailsTabLabelArtifacts),
+                  _TabBtn(3, tabController,
+                      iconImg: 'timeline', color: iconColor, label: $strings.wonderDetailsTabLabelEvents),
                 ],
               )
             ],

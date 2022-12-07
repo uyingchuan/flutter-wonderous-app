@@ -1,27 +1,53 @@
-import 'dart:async';
-
-import 'package:flutter/rendering.dart';
+import 'package:flutter/foundation.dart';
 import 'package:wonders/common_libs.dart';
 
-/// 封装一层用来测量组件尺寸
-class MeasurableWidget extends SingleChildRenderObjectWidget {
-  const MeasurableWidget({Key? key, required this.onChange, required Widget child}): super(key: key, child: child);
-  final void Function(Size size) onChange;
+class AppIcon extends StatelessWidget {
+  const AppIcon({Key? key, required this.icon, required this.size, this.color})
+      : super(key: key);
+
+  final AppIcons icon;
+  final double size;
+  final Color? color;
+
   @override
-  RenderObject createRenderObject(BuildContext context) => MeasureSizeRenderObject(onChange);
+  Widget build(BuildContext context) {
+    String i = describeEnum(icon).toLowerCase().replaceAll('_', '-');
+    String path = '${ImagePaths.common}/icons/icon-$i.png';
+    return SizedBox(
+      width: size,
+      height: size,
+      child: Center(
+        child: Image.asset(
+          path,
+          width: size,
+          height: size,
+          color: color ?? $styles.colors.offWhite,
+          filterQuality: FilterQuality.high,
+        ),
+      ),
+    );
+  }
 }
 
-class MeasureSizeRenderObject extends RenderProxyBox {
-  MeasureSizeRenderObject(this.onChange);
-  void Function(Size size) onChange;
-
-  Size _prevSize = Size.zero;
-  @override
-  void performLayout() {
-    super.performLayout();
-    Size newSize = child?.size ?? Size.zero;
-    if (_prevSize == newSize) return;
-    _prevSize = newSize;
-    scheduleMicrotask(() => onChange(newSize));
-  }
+enum AppIcons {
+  close,
+  close_large,
+  collection,
+  download,
+  expand,
+  fullscreen,
+  fullscreen_exit,
+  info,
+  menu,
+  next_large,
+  north,
+  prev,
+  reset_location,
+  search,
+  share_android,
+  share_ios,
+  timeline,
+  wallpaper,
+  zoom_in,
+  zoom_out
 }

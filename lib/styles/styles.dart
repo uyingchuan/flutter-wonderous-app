@@ -20,6 +20,9 @@ class AppStyle {
 
   /// 圆角半径
   late final _Corners corners = _Corners();
+
+  /// 动画时间
+  final _Times times = _Times();
 }
 
 @immutable
@@ -40,6 +43,48 @@ class _Text {
   final Map<String, TextStyle> _wonderTitleFonts = {
     'en': const TextStyle(fontFamily: 'Yeseva'),
   };
+
+  TextStyle _getFontForLocale(Map<String, TextStyle> fonts) {
+    if (localeLogic.isLoaded) {
+      return fonts.entries.firstWhere((x) => x.key == $strings.localeName, orElse: () => fonts.entries.first).value;
+    } else {
+      return fonts.entries.first.value;
+    }
+  }
+
+  TextStyle get titleFont => _getFontForLocale(_titleFonts);
+  TextStyle get quoteFont => _getFontForLocale(_quoteFonts);
+  TextStyle get wonderTitleFont => _getFontForLocale(_wonderTitleFonts);
+  TextStyle get contentFont => _getFontForLocale(_contentFonts);
+  TextStyle get monoTitleFont => _getFontForLocale(_monoTitleFonts);
+
+  late final TextStyle dropCase = copy(quoteFont, sizePx: 56, heightPx: 20);
+
+  late final TextStyle wonderTitle = copy(wonderTitleFont, sizePx: 64, heightPx: 56);
+
+  late final TextStyle h1 = copy(titleFont, sizePx: 64, heightPx: 62);
+  late final TextStyle h2 = copy(titleFont, sizePx: 32, heightPx: 46);
+  late final TextStyle h3 = copy(titleFont, sizePx: 24, heightPx: 36, weight: FontWeight.w600);
+  late final TextStyle h4 = copy(contentFont, sizePx: 14, heightPx: 23, spacingPc: 5, weight: FontWeight.w600);
+
+  late final TextStyle title1 = copy(titleFont, sizePx: 16, heightPx: 26, spacingPc: 5);
+  late final TextStyle title2 = copy(titleFont, sizePx: 14, heightPx: 16.38);
+
+  late final TextStyle body = copy(contentFont, sizePx: 16, heightPx: 27);
+  late final TextStyle bodyBold = copy(contentFont, sizePx: 16, heightPx: 26, weight: FontWeight.w600);
+  late final TextStyle bodySmall = copy(contentFont, sizePx: 14, heightPx: 23);
+  late final TextStyle bodySmallBold = copy(contentFont, sizePx: 14, heightPx: 23, weight: FontWeight.w600);
+
+  late final TextStyle quote1 = copy(quoteFont, sizePx: 32, heightPx: 40, weight: FontWeight.w600, spacingPc: -3);
+  late final TextStyle quote2 = copy(quoteFont, sizePx: 21, heightPx: 32, weight: FontWeight.w400);
+  late final TextStyle quote2Sub = copy(body, sizePx: 16, heightPx: 40, weight: FontWeight.w400);
+
+  late final TextStyle caption =
+  copy(contentFont, sizePx: 12, heightPx: 18, weight: FontWeight.w500).copyWith(fontStyle: FontStyle.italic);
+
+  late final TextStyle callout =
+  copy(contentFont, sizePx: 16, heightPx: 26, weight: FontWeight.w600).copyWith(fontStyle: FontStyle.italic);
+  late final TextStyle btn = copy(titleFont, sizePx: 12, weight: FontWeight.w600, heightPx: 13.2);
 
   final Map<String, TextStyle> _contentFonts = {
     'en': const TextStyle(fontFamily: 'Raleway', fontFeatures: [
@@ -75,4 +120,12 @@ class _Corners {
   late final double sm = 4;
   late final double md = 8;
   late final double lg = 32;
+}
+
+@immutable
+class _Times {
+  final Duration fast = const Duration(milliseconds: 300);
+  final Duration med = const Duration(milliseconds: 600);
+  final Duration slow = const Duration(milliseconds: 900);
+  final Duration pageTransition = const Duration(milliseconds: 200);
 }
